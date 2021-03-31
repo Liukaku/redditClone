@@ -8,6 +8,6 @@ export const initialState1 = {
 }
 
 
-export const CTX = React.createContext(null);
+export const CTX = React.createContext({ loading: true });
 
 export default CTX
