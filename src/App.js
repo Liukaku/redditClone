@@ -4,7 +4,7 @@ import './App.css';
 import axios from 'axios'
 
 import Comments from './components/Comments'
-import Attempt2 from './components/Attempt2'
+import CommentNode from './components/CommentNode'
 
 function App() {
 
@@ -89,7 +89,11 @@ function App() {
         </div>
 
         {!commObj.loading ? (
-          <Attempt2 data={dataSet} />
+          commObj.commentList.map(comm =>
+            <div className='OPComment'>
+              <CommentNode node={comm} test={commObj} updateTest={updateCommObj} />
+            </div>
+          )
         ) : (
           <p>
             loading

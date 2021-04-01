@@ -3,7 +3,7 @@ import Attempt2 from './Attempt2'
 import Attempt3 from './Attempt3'
 import CTX from './Store'
 
-const CommentNode = ({ node, test }) => {
+const CommentNode = ({ node, test, updateTest }) => {
 
   const [commObj, updateCommObj] = useState(CTX)
   const [childVisible, setChildVisiblity] = useState(true);
@@ -35,15 +35,36 @@ const CommentNode = ({ node, test }) => {
       }
     }
 
+  }
 
+
+  const whichOne = ([value, paren]) => {
+    console.log(value)
+    console.log(paren)
+
+    if (value.map(unga => { return unga.id }).indexOf(paren) == '-1') {
+      const arr = paren.split('-')
+      const fin = `${arr[0]}-${arr[1]}`
+      console.log(value)
+      const hereWeGoAgain = value.map(unga => { return unga.id }).indexOf(fin)
+      console.log(hereWeGoAgain)
+
+      whichOne([value[hereWeGoAgain].replies, hereWeGoAgain])
+    }
+    else return value.map(unga => { return unga.id }).indexOf(paren)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.parentNode[0].value)
+    const aaa = test
+    const parentID = e.target.parentNode.parentNode.parentNode.classList[1]
+    console.log(parentID)
+
+
+
     const newState = {
-      commentList: commObj.commentList,
-      loading: commObj.loading,
+      commentList: aaa.commentList,
+      loading: aaa.loading,
       newComment: {
         user: {
           id: '',
@@ -54,9 +75,13 @@ const CommentNode = ({ node, test }) => {
         replies: []
       }
     }
-
-    console.log(commObj)
+    console.log(whichOne(aaa.commentList))
+    aaa.commentList[whichOne([aaa.commentList, parentID])].replies.unshift(newState.newComment)
+    console.log(newState)
+    updateCommObj(newState)
   }
+
+
 
   return (
     <ul className={`commentGroup ${node.id}`} id={`commentGroup${node.id}`} >
