@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import CTX from './Store'
 import CommentNode from './CommentNode'
 
-const Attempt3 = ({ data = [], test }) => {
+const CommentChain = ({ data = [], test }) => {
 
   const [commObj, updateCommObj] = useState(CTX)
   const [childVisible, setChildVisiblity] = useState(true);
@@ -19,4 +19,4 @@ const Attempt3 = ({ data = [], test }) => {
   )
 }
 
-export default Attempt3
+export default CommentChain
