@@ -59,6 +59,12 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    if (document.getElementById('usernameText').value == '' || document.getElementById('userCommentText').value == '') {
+      return
+    }
+
+
     const currentState = commObj
 
     currentState.commentList.unshift(commObj.newComment)
@@ -73,6 +79,7 @@ function App() {
     })
     document.getElementById('usernameText').value = ''
     document.getElementById('userCommentText').value = ''
+
   }
 
 
@@ -82,8 +89,10 @@ function App() {
       <div className='container'>
         <div>
           <form>
-            <input type="text" id='usernameText' onChange={handleChange}></input>
-            <input type="text" id='userCommentText' onChange={handleChange}></input>
+            <input type="text" id='usernameText' placeholder='User Name' onChange={handleChange}></input>
+            <br />
+            <input type="text" id='userCommentText' placeholder='New Comment' onChange={handleChange}></input>
+            <br />
             <button type='submit' onClick={handleSubmit}> submit</button>
           </form>
         </div>
